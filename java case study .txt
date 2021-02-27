@@ -1,0 +1,19 @@
+mysql -u root -p
+123456789
+create databases oopjavadb;
+CREATE USER library IDENTIFIED BY library;
+grant all privileges on oopjavadb.* to library@localhost; 
+flush privileges;
+Create table users(id INT PRIMARY KEY , name VARCHAR(50) , email VARCHAR(50), phone VARCHAR(15) ,password VARCHAR(50), role VARCHAR(15));
+DESC users;
+CREATE TABLE books(id INT PRIMARY KEY, name VARCHAR(100), author VARCHAR(80), subject VARCHAR(50), price DOUBLE, isbn VARCHAR(20));
+DESC books;
+CREATE table copies( id INT PRIMARY KEY, bookid INT,rack INT,status VARCHAR(20), FOREIGN KEY (bookid) REFERENCES books(id));
+desc copies;
+CREATE table payments( id INT PRIMARY KEY, userid INT ,amount DOUBLE,type VARCHAR(20),transaction_time datetime,nextpayment_duedate date,FOREIGN KEY(userid) REFERENCES users(id));
+desc payments;
+CREATE table issuerecord( id INT PRIMARY KEY,copyid INT,memberid INT,issue_date date,return_duedate date,return_date date,fine_amount DOUBLE, FOREIGN KEY(copyid) REFERENCES copies(id),FOREIGN KEY(memberid) REFERENCES users(id));
+desc issuerecord;
+
+
+
